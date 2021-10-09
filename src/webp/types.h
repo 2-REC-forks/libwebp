@@ -41,6 +41,13 @@ typedef long long int int64_t;
 // signature for e.g., Windows DLL builds.
 # if defined(__GNUC__) && __GNUC__ >= 4
 #  define WEBP_EXTERN extern __attribute__ ((visibility ("default")))
+# elif defined(_WIN32)
+#  ifdef DLLBUILD
+#   define WEBP_EXTERN __declspec(dllexport)
+#  else
+//#   define WEBP_EXTERN __declspec(dllimport)
+#   define WEBP_EXTERN extern
+#  endif
 # else
 #  define WEBP_EXTERN extern
 # endif  /* __GNUC__ >= 4 */
