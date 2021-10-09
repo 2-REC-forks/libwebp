@@ -637,7 +637,7 @@ extern void (*WebPExtractGreen)(const uint32_t* WEBP_RESTRICT argb,
 // Un-Multiply operation transforms x into x * 255 / A.
 
 // Pre-Multiply or Un-Multiply (if 'inverse' is true) argb values in a row.
-extern void (*WebPMultARGBRow)(uint32_t* const ptr, int width, int inverse);
+WEBP_EXTERN void (*WebPMultARGBRow)(uint32_t* const ptr, int width, int inverse);
 
 // Same a WebPMultARGBRow(), but for several rows.
 void WebPMultARGBRows(uint8_t* ptr, int stride, int width, int num_rows,
@@ -682,7 +682,7 @@ extern int (*WebPHasAlpha32b)(const uint8_t* src, int length);
 extern void (*WebPAlphaReplace)(uint32_t* src, int length, uint32_t color);
 
 // To be called first before using the above.
-void WebPInitAlphaProcessing(void);
+WEBP_EXTERN void WebPInitAlphaProcessing(void);
 
 //------------------------------------------------------------------------------
 // Filter functions

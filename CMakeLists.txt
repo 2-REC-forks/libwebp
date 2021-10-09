@@ -14,6 +14,10 @@ endif()
 
 project(WebP C)
 
+if(WIN32 AND BUILD_SHARED_LIBS)
+  add_definitions(-DDLLBUILD)
+endif()
+
 # Options for coder / decoder executables.
 if(NOT EMSCRIPTEN)
   # Disable SIMD on Emscripten by default, as it's a new unstable Wasm feature.
@@ -517,6 +521,7 @@ if(WEBP_BUILD_IMG2WEBP)
                         libwebpmux)
   target_include_directories(img2webp PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/src)
   install(TARGETS img2webp RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR})
+  set_target_properties(img2webp PROPERTIES LINK_FLAGS "/NODEFAULTLIB:libcmt.lib")
 endif()
 
 if(WEBP_BUILD_VWEBP)
@@ -582,6 +587,7 @@ if(WEBP_BUILD_EXTRAS)
                              PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
                                      ${CMAKE_CURRENT_SOURCE_DIR}/src
                                      ${CMAKE_CURRENT_BINARY_DIR}/src)
+  set_target_properties(get_disto PROPERTIES LINK_FLAGS "/NODEFAULTLIB:libcmt.lib")
 
   # webp_quality
   add_executable(webp_quality ${WEBP_QUALITY_SRCS} ${WEBP_EXTRAS_SRCS})
