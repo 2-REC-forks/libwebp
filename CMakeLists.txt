@@ -14,7 +14,7 @@ endif()
 
 project(WebP C)
 
-# Specific Visual Studio case (Windows)
+# Specific Windows case for shared libraries
 if(WIN32 AND BUILD_SHARED_LIBS)
   add_definitions(-DDLLBUILD)
 endif()
